@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/beans">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+</head>
+<body>欢迎您，<span id="username"></span>
+<a href="/login/logout">退出登陆</a>
+<br>
+<hr>
+<h3>您所拥有的权限为：</h3>
+<dl id="msg"></dl>
+<hr>
+<h3>验证方法权限注解：</h3>
+<a href="javascript:void (0);" id="add">验证用户新增</a><br>
+<a href="javascript:void (0);" id="del">验证用户删除</a><br>
+<a href="javascript:void (0);" id="update">验证用户修改</a><br>
+<a href="javascript:void (0);" id="list">验证用户列表</a>
+</body>
+<script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="/js/layui/layui.all.js"></script>
+<script type="text/javascript" src="/js/common.js"></script>
+<script type="application/javascript">
+    $(function(){
+        layui.use('layer', function(){
+            var layer = layui.layer;
+        });
+        $.ajax({
+            url: "/user/userInfo",
+            type:"GET",
+            success: function (result) {
+                $("#username").text(result.username);
+                $("#msg").text(result.authorities[0].authority);
+            }
+        });
+
+        $("#add").click(function () {
+            $.ajax({
+                url: "/user/add",
+                type:"POST",
+                success: function (result) {
+                    layer.msg(result);
+                },
+                error: function(jqXHR, error, errorThrown) {
+                    if (jqXHR.status === 403) {
+                        layer.msg("您没有权限！");
+                    }
+                }
+            });
+        });
+
+        $("#del").click(function () {
+            $.ajax({
+                url: "/user/del",
+                type:"DELETE",
+                success: function (result) {
+                    layer.msg(result);
+                },
+                error: function(jqXHR, error, errorThrown) {
+                    if (jqXHR.status === 403) {
+                        layer.msg("您没有权限！");
+                    }
+                }
+            });
+        });
+
+        $("#update").click(function () {
+            $.ajax({
+                url: "/user/update",
+                type:"PUT",
+                success: function (result) {
+                    layer.msg(result);
+                },
+                error: function(jqXHR, error, errorThrown) {
+                    if (jqXHR.status === 403) {
+                        layer.msg("您没有权限！");
+                    }
+                }
+            });
+        });
+
+        $("#list").click(function () {
+            $.ajax({
+                url: "/user/list",
+                type:"GET",
+                success: function (result) {
+                    layer.msg(result);
+                },
+                error: function(jqXHR, error, errorThrown) {
+                    if (jqXHR.status === 403) {
+                        layer.msg("您没有权限！");
+                    }
+                }
+            });
+        });
+
+    });
+
+</script>
+</html>

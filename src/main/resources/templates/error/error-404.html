@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>愿世界没有BUG</title>
+    <link rel="stylesheet" href="/js/layui/css/layui.css"  media="all">
+    <script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/js/layui/layui.js"></script>
+    <style>
+        .layui-body .layadmin-tabsbody-item {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            overflow: hidden;
+            overflow-y: auto;
+        }
+        .layadmin-tips {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .layadmin-tips .layui-text {
+            width: 500px;
+            margin: 30px auto;
+            padding-top: 20px;
+            border-top: 5px solid #009688;
+            font-size: 16px;
+        }
+        .layadmin-tips .layui-icon[face] {
+            display: inline-block;
+            font-size: 300px;
+            color: #393D49;
+        }
+        .layadmin-tips h1 {
+            font-size: 100px;
+            line-height: 100px;
+            color: #009688;
+        }
+        .layui-text .layui-anim {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+<div class="layadmin-tabsbody-item layui-show"><div class="layui-fluid">
+    <div class="layadmin-tips">
+        <i class="layui-icon" face=""></i>
+        <div class="layui-text">
+            <h1>
+                <span class="layui-anim layui-anim-loop layui-anim-">4</span>
+                <span class="layui-anim layui-anim-loop layui-anim-rotate">0</span>
+                <span class="layui-anim layui-anim-loop layui-anim-">4</span>
+            </h1>
+        </div>
+    </div>
+</div></div>
+<script>
+    layui.use(['element','layer'], function(){
+
+    });
+</script>
+</body>
+</html>
