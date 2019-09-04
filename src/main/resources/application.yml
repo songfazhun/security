@@ -14,13 +14,13 @@ spring:
     mode: LEGACYHTML5
   #数据库配置
   datasource:
-    url: jdbc:mysql://139.155.25.92:3306/security?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+    url: jdbc:mysql://yourDatasource:3306/security?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
-#    initialization-mode: always
-#    schema: classpath:db/schema.sql
-#    data: classpath:db/data.sql
+    initialization-mode: always
+    schema: classpath:db/schema.sql
+    data: classpath:db/data.sql
     # 下面为连接池的补充设置，应用到上面所有数据源中
     initialSize: 5
     minIdle: 5
