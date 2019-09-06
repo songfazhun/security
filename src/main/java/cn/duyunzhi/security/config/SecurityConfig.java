@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -32,22 +33,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private CustomUserDetailsService customUserDetailsService;
 
-	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(customUserDetailsService())
 				.passwordEncoder(passwordEncoder());
 	}
 
-
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		//防止iframe错误:in a frame because it set 'X-Frame-Options' to 'deny'.
+		http.headers()
+				.frameOptions().sameOrigin()
+				.httpStrictTransportSecurity().disable();
+
 		http.authorizeRequests()
 				// 所有用户均可访问的资源 只支持GET请求,其它请求需做处理
 				.antMatchers("/favicon.ico", "/css/**", "/js/**", "/img/**", "/login/toLogin", "/login/getVerify", "/login/userLogin").permitAll()
 				// 任何尚未匹配的URL只需要验证用户即可访问
 				.anyRequest().authenticated()
 				.and()
-				.formLogin().loginPage("/login/toLogin").successForwardUrl("/index")
+				.formLogin().loginPage("/login/toLogin")
+				.successForwardUrl("/index")
 				.and()
 				//权限拒绝的页面
 				.exceptionHandling().accessDeniedPage("/error-403");
