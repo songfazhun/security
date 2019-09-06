@@ -29,6 +29,6 @@ public class BaseController {
     }
 
     protected String getUserIp() {
-        return  getRequest().getRemoteHost() + "/" + getRequest().getRemoteAddr();
+        return  getRequest().getRemoteHost();
     }
 }
