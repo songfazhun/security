@@ -1,5 +1,6 @@
 package cn.duyunzhi.security.controller;
 
+import cn.duyunzhi.security.bean.JsonAsynResult;
 import cn.duyunzhi.security.entity.User;
 import cn.duyunzhi.security.utils.SecurityUtil;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,25 +25,25 @@ public class UserController {
 
 	@RequestMapping(value = "/add",method = RequestMethod.POST)
 	@PreAuthorize("hasAuthority('系统管理员') or hasAuthority('管理员')")
-	public String add(){
-		return "add success";
+	public JsonAsynResult add(){
+		return JsonAsynResult.createSucResult("add success");
 	}
 
 	@RequestMapping(value = "/del",method = RequestMethod.DELETE)
 	@PreAuthorize("hasAuthority('系统管理员')")
-	public String del(){
-		return "del success";
+	public JsonAsynResult del(){
+		return JsonAsynResult.createSucResult("del success");
 	}
 
 	@RequestMapping(value = "/update",method = RequestMethod.PUT)
 	@PreAuthorize("hasAuthority('系统管理员') or hasAuthority('管理员')")
-	public String update(){
-		return "update success";
+	public JsonAsynResult update(){
+		return JsonAsynResult.createSucResult("update success");
 	}
 
 	@RequestMapping(value = "/list",method = RequestMethod.GET)
 	@PreAuthorize("hasAnyAuthority('系统管理员','管理员','普通用户')")
-	public String list(){
-		return "list success";
+	public JsonAsynResult list(){
+		return JsonAsynResult.createSucResult("list success");
 	}
 }

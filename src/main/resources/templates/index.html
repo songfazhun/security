@@ -41,12 +41,7 @@
                 url: "/user/add",
                 type:"POST",
                 success: function (result) {
-                    layer.msg(result);
-                },
-                error: function(jqXHR, error, errorThrown) {
-                    if (jqXHR.status === 403) {
-                        layer.msg("您没有权限！");
-                    }
+                    layer.msg(result.message);
                 }
             });
         });
@@ -56,12 +51,7 @@
                 url: "/user/del",
                 type:"DELETE",
                 success: function (result) {
-                    layer.msg(result);
-                },
-                error: function(jqXHR, error, errorThrown) {
-                    if (jqXHR.status === 403) {
-                        layer.msg("您没有权限！");
-                    }
+                    layer.msg(result.message);
                 }
             });
         });
@@ -71,12 +61,7 @@
                 url: "/user/update",
                 type:"PUT",
                 success: function (result) {
-                    layer.msg(result);
-                },
-                error: function(jqXHR, error, errorThrown) {
-                    if (jqXHR.status === 403) {
-                        layer.msg("您没有权限！");
-                    }
+                    layer.msg(result.message);
                 }
             });
         });
@@ -86,12 +71,7 @@
                 url: "/user/list",
                 type:"GET",
                 success: function (result) {
-                    layer.msg(result);
-                },
-                error: function(jqXHR, error, errorThrown) {
-                    if (jqXHR.status === 403) {
-                        layer.msg("您没有权限！");
-                    }
+                    layer.msg(result.message);
                 }
             });
         });
